@@ -5,12 +5,14 @@ on:
     branches: [ "master" ]
   pull_request:
     branches: [ "master" ]
+  workflow_dispatch:
 
 permissions:
   pull-requests: read
 
 jobs:
   sonar-check:
+    name: Sonar Check
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v4
@@ -33,7 +35,7 @@ jobs:
         shell: pwsh
 
       - name: Build
-        run: dotnet build oleksiuknazar.sln -c Release
+        run: dotnet build NetSdrClient.sln -c Release
 
       - name: SonarScanner End
         run: dotnet sonarscanner end /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
