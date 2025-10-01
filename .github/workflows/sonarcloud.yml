@@ -15,14 +15,17 @@ jobs:
     name: Sonar Check
     runs-on: windows-latest
     steps:
+     
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
+      
       - uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '8.0.x'
 
+      
       - name: SonarScanner Begin
         run: |
           dotnet tool install --global dotnet-sonarscanner
@@ -34,10 +37,10 @@ jobs:
           /d:sonar.qualitygate.wait=true
         shell: pwsh
 
+      
       - name: Build
         run: dotnet build NetSdrClient.sln -c Release
 
       - name: SonarScanner End
         run: dotnet sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
-
         shell: pwsh
