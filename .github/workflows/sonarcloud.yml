@@ -28,9 +28,9 @@ jobs:
           dotnet tool install --global dotnet-sonarscanner
           echo "$env:USERPROFILE\.dotnet\tools" >> $env:GITHUB_PATH
           dotnet sonarscanner begin `
-          /d:sonar.projectKey="OleksiukNazar" `
-          /d:sonar.organization="oleksiuknazar" `
-          /d:sonar.token="${{ secrets.SONAR_TOKEN }}" `
+          /k:"OleksiukNazar" `
+          /o:"oleksiuknazar" `
+          /d:sonar.login="${{ secrets.SONAR_TOKEN }}" `
           /d:sonar.qualitygate.wait=true
         shell: pwsh
 
@@ -38,5 +38,6 @@ jobs:
         run: dotnet build NetSdrClient.sln -c Release
 
       - name: SonarScanner End
-        run: dotnet sonarscanner end /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
+        run: dotnet sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
+
         shell: pwsh
