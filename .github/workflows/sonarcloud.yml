@@ -31,7 +31,7 @@ jobs:
           dotnet tool install --global dotnet-sonarscanner
           echo "$env:USERPROFILE\.dotnet\tools" >> $env:GITHUB_PATH
           dotnet sonarscanner begin `
-          /k:"OleksiukNazar" `
+          /k:"oleksiukNazar" `
           /o:"oleksiuknazar" `
           /d:sonar.login="${{ secrets.SONAR_TOKEN }}" `
           /d:sonar.qualitygate.wait=true
